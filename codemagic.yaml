@@ -13,12 +13,12 @@ workflows:
       - name: Install dependencies
         script: |
           npm install --legacy-peer-deps
-      - name: Set up Expo CLI
+      - name: Install EAS CLI
         script: |
-          npm install -g @expo/cli
+          npm install -g eas-cli
       - name: Build Android APK
         script: |
-          CI=1 npx eas build --platform android --profile development --non-interactive
+          eas build --platform android --profile development --non-interactive
     artifacts:
       - build/**/outputs/**/*.apk
     publishing:
