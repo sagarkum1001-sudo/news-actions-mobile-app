@@ -20,7 +20,7 @@ workflows:
           npm install -g @expo/cli
       - name: Build Android APK
         script: |
-          CI=1 npx expo build:android --type apk
+          npx eas build --platform android --profile production --non-interactive
     artifacts:
       - build/**/outputs/**/*.apk
     publishing:
