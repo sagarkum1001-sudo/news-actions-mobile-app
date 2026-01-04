@@ -5,6 +5,8 @@ workflows:
     environment:
       node: latest
       java: 17
+      groups:
+        - expo_credentials
     cache:
       cache_paths:
         - ~/.npm
