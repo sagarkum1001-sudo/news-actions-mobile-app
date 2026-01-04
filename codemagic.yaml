@@ -20,7 +20,7 @@ workflows:
           npm install -g eas-cli
       - name: Build Android APK
         script: |
-          eas build --platform android --profile development --non-interactive
+          eas build --platform android --profile production --non-interactive
     artifacts:
       - build/**/outputs/**/*.apk
     publishing:
