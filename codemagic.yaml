@@ -18,9 +18,6 @@ workflows:
       - name: Install EAS CLI
         script: |
           npm install -g eas-cli
-      - name: Configure EAS Project
-        script: |
-          eas init --yes --id 1bc9fd61-7b88-4161-8f32-c4a3cf77ff92
       - name: Build Android APK
         script: |
           eas build --platform android --profile production --non-interactive
