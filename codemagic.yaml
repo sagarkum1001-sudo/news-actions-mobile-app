@@ -17,7 +17,7 @@ workflows:
           npm install --legacy-peer-deps
       - name: Install EAS CLI
         script: |
-          npm install -g @expo/eas-cli
+          npm install -g eas-cli
       - name: Build Android APK
         script: |
           eas build --platform android --profile production --non-interactive
