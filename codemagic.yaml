@@ -1,0 +1,27 @@
+workflows:
+  react-native-android:
+    name: React Native Android
+    max_build_duration: 120
+    environment:
+      node: latest
+      java: 17
+    cache:
+      cache_paths:
+        - ~/.npm
+        - node_modules
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install --legacy-peer-deps
+      - name: Set up Expo CLI
+        script: |
+          npm install -g @expo/cli
+      - name: Build Android APK
+        script: |
+          npx expo build:android --type apk --non-interactive
+    artifacts:
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - sagarkum1001@gmail.com
