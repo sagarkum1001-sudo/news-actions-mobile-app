@@ -1,4 +1,36 @@
 {
-  "name": "NewsActionsApp",
-  "displayName": "NewsActionsApp"
+  "expo": {
+    "name": "NewsActionsApp",
+    "displayName": "NewsActionsApp",
+    "slug": "newsactionsapp",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1bc9fd61-7b88-4161-8f32-c4a3cf77ff92"
+      }
+    }
+  }
 }
