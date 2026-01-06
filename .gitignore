@@ -36,6 +36,7 @@ local.properties
 .kotlin/
 
 # Expo
+.expo/
 android/
 ios/
 
