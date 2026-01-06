@@ -6,6 +6,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.newsactionsapp"
+    },
     "extra": {
       "eas": {
         "projectId": "1bc9fd61-7b88-4161-8f32-c4a3cf77ff92"
