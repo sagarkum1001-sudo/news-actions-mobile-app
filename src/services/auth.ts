@@ -1,8 +1,7 @@
-// Authentication service using Google OAuth with Supabase
-// Replicates web app authentication for seamless cross-platform experience
+// Authentication service using Supabase Auth
+// Simplified auth for Expo managed workflow compatibility
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../constants/config';
 import { User } from '../types';
 
@@ -15,28 +14,25 @@ class AuthService {
   }
 
   /**
-   * Initialize Google Sign-In
+   * Initialize authentication service
    */
   async initialize(): Promise<void> {
     if (this.isInitialized) return;
 
     try {
-      GoogleSignin.configure({
-        webClientId: 'your-web-client-id.apps.googleusercontent.com', // Replace with actual web client ID
-        offlineAccess: true,
-        forceCodeForRefreshToken: true,
-      });
-
+      // For Expo managed workflow, we'll use a simplified approach
+      // In production, you would integrate with Expo's AuthSession or similar
       this.isInitialized = true;
-      console.log('✅ Google Sign-In initialized');
+      console.log('✅ Auth service initialized');
     } catch (error) {
-      console.error('❌ Failed to initialize Google Sign-In:', error);
+      console.error('❌ Failed to initialize auth service:', error);
       throw error;
     }
   }
 
   /**
-   * Sign in with Google
+   * Sign in with Google (simplified for Expo managed workflow)
+   * Note: In production, integrate with Expo's AuthSession or WebBrowser
    */
   async signInWithGoogle(): Promise<User> {
     try {
@@ -49,47 +45,16 @@ class AuthService {
         return this.mapSupabaseUserToUser(existingSession.session.user);
       }
 
-      // Start Google Sign-In flow
-      console.log('🔄 Starting Google Sign-In...');
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
+      // For Expo managed workflow, we'll use a simplified approach
+      // In production, you would implement proper OAuth flow with Expo's modules
+      console.log('🔄 Starting simplified sign-in...');
 
-      // Get the ID token from the user info
-      const tokens = await GoogleSignin.getTokens();
-      if (!tokens.idToken) {
-        throw new Error('No ID token received from Google Sign-In');
-      }
-
-      console.log('🔄 Signing in with Supabase...');
-      const { data, error } = await this.supabase.auth.signInWithIdToken({
-        provider: 'google',
-        token: tokens.idToken,
-      });
-
-      if (error) {
-        console.error('❌ Supabase sign-in error:', error);
-        throw error;
-      }
-
-      if (!data.user) {
-        throw new Error('No user data received from Supabase');
-      }
-
-      console.log('✅ Successfully signed in:', data.user.email);
-      return this.mapSupabaseUserToUser(data.user);
+      // For now, throw an error indicating Google Sign-In is not implemented
+      // Replace this with proper Expo AuthSession implementation
+      throw new Error('Google Sign-In not yet implemented for Expo managed workflow. Please implement using Expo AuthSession.');
 
     } catch (error: any) {
-      console.error('❌ Google Sign-In failed:', error);
-
-      // Handle specific error cases
-      if (error?.code === 'SIGN_IN_CANCELLED') {
-        throw new Error('Sign-in was cancelled');
-      } else if (error?.code === 'SIGN_IN_REQUIRED') {
-        throw new Error('Sign-in is required');
-      } else if (error?.code === 'PLAY_SERVICES_NOT_AVAILABLE') {
-        throw new Error('Google Play Services not available');
-      }
-
+      console.error('❌ Sign-In failed:', error);
       throw error;
     }
   }
@@ -105,14 +70,6 @@ class AuthService {
       const { error: supabaseError } = await this.supabase.auth.signOut();
       if (supabaseError) {
         console.warn('⚠️ Supabase sign-out warning:', supabaseError);
-      }
-
-      // Sign out from Google
-      try {
-        await GoogleSignin.signOut();
-        console.log('✅ Google Sign-Out successful');
-      } catch (googleError) {
-        console.warn('⚠️ Google sign-out warning:', googleError);
       }
 
       console.log('✅ Sign-out complete');
